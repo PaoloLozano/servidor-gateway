@@ -15,8 +15,16 @@ spec:
       containers:
         - name: servidor-gateway
           image: servidor-gateway:1.0
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+
           env:
+            - name: CONFIG_SERVER_URL
+              value: http://servidor-configuracion-service:8888
+
             - name: EUREKA_URL
               value: http://servidor-discovery-service:8761/eureka/
+
+            - name: EUREKA_INSTANCE_HOSTNAME
+              value: servidor-gateway-service
