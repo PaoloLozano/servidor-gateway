@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servidor-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servidor-gateway
+  template:
+    metadata:
+      labels:
+        app: servidor-gateway
+    spec:
+      containers:
+        - name: servidor-gateway
+          image: servidor-gateway:1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: EUREKA_URL
+              value: http://servidor-discovery-service:8761/eureka/
